@@ -1,0 +1,11 @@
+type Creator{
+    id: Int
+    name: String
+}
+type Post{
+    id: ID
+    title: String
+    body: String
+    creator: Creator
+}
+
