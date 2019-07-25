@@ -1,5 +1,6 @@
 const {buildSchema} = require("graphql");
 const {importSchema} = require('graphql-import');
+const {ValidationError} = require('sequelize');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = importSchema("./src/newSchema.graphql");
@@ -10,6 +11,13 @@ const db = require('./src/data/db');
 let resolvers = {
     creators: () => {
         return db.models.creators.findAll()
+    },
+    createCreator: (name) => {
+        console.log(name);
+        db.models.creators.create({name: name['name'], id: 6})
+            .then(() => {
+                return db.models.creators.findAll({where: db.models.creators().id === 6});
+            }).catch(ValidationError, err => console.log(err));
     }
 };
 
