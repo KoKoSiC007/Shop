@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-
 const sequelize = new Sequelize('core', 'kokos', '', {
     dialect: 'postgres',
     host: 'localhost',
@@ -10,13 +9,14 @@ const sequelize = new Sequelize('core', 'kokos', '', {
 
 const Creator = sequelize.define('creators', {
     id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.UUID,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false
     },
     name: {
         type: Sequelize.TEXT
-    }
+    },
 });
 
 const Product = sequelize.define('products', {
